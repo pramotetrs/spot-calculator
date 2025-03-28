@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Include Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            function calculateUSD() {
+                const goldSpot = parseFloat(document.getElementById("gold-spot").value) || 0;
+                const usd = (goldSpot * 100 / 31.1035).toFixed(2);
+                document.getElementById("usd").value = parseFloat(usd).toLocaleString();
+                const exchangeRate = parseFloat(document.getElementById("exchange-rate").value) || 0;
+                const thb = (parseFloat(usd) * exchangeRate).toFixed(2);
+                document.getElementById("thb").value = parseFloat(thb).toLocaleString();
+            }
+            function calculateTHB() {
+                const usd = parseFloat(document.getElementById("usd").value.replace(/,/g, '')) || 0;
+                const exchangeRate = parseFloat(document.getElementById("exchange-rate").value) || 0;
+                const thb = (parseFloat(usd) * exchangeRate).toFixed(2);
+                document.getElementById("thb").value = parseFloat(thb).toLocaleString();
+            }
+        </script>
+    </head>
+    <body class="bg-gray-100 text-gray-900 font-sans p-6">
+        <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+            <h1 class="text-2xl font-bold mb-4 text-center">Gold Price Calculator</h1>
+            <div class="mb-4">
+                <label for="gold-spot" class="block text-sm font-medium text-gray-700">Gold Spot:</label>
+                <input id="gold-spot" type="text" name="gold-spot" oninput="calculateUSD()" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
+            </div>
+            <div class="mb-4">
+                <label for="exchange-rate" class="block text-sm font-medium text-gray-700">Exchange Rate:</label>
+                <input id="exchange-rate" type="text" name="exchange-rate" oninput="calculateTHB()" 
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
+            </div>
+            <div class="mb-4">
+                <label for="usd" class="block text-sm font-medium text-gray-700">USD (100g):</label>
+                <input id="usd" type="text" name="usd" readonly 
+                    class="mt-1 block w-full rounded-md bg-gray-100 border-gray-300 shadow-sm sm:text-sm"/>
+            </div>
+            <div class="mb-4">
+                <label for="thb" class="block text-sm font-medium text-gray-700">THB (100g):</label>
+                <input id="thb" type="text" name="thb" readonly 
+                    class="mt-1 block w-full rounded-md bg-gray-100 border-gray-300 shadow-sm sm:text-sm"/>
+            </div>
+        </div>
+    </body>
+</html>
